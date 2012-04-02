@@ -1,0 +1,10 @@
+function petLoad()
+   Collider = HC(100, on_collide)
+
+   player = love.graphics.newImage("petsitter128.png")
+   pacX = 200
+   pacY = 200
+   pacCollider = Collider:addCircle(pacX+64, pacY+64, 64)
+
+   gamepad = love.joystick.open(0)
+end
