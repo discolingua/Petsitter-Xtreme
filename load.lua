@@ -19,5 +19,4 @@ function petLoad()
    petY = 200
    petCollider = Collider:addRectangle(petX+64, petY+32, 128, 64)
    gamepad = love.joystick.open(0)
-
 end
