@@ -1,10 +1,36 @@
 function petUpdate(dt)
+   toggleFrames()
    movePlayer()
    movePet()
    checkColliders()
    miscUpkeep()
 
   
+end
+
+function toggleFrames()
+   -- left-right flip
+   if (playerX > petX) and flipSide == "left" then
+      playerFrame1:flip(true,false)
+      playerFrame2:flip(true,false)
+      petFrame1:flip(true,false)
+      petFrame2:flip(true,false)
+      flipSide = "right" 
+   elseif (playerX < petX) and flipSide == "right" then
+      playerFrame1:flip(true,false)
+      playerFrame2:flip(true,false)
+      petFrame1:flip(true,false)
+      petFrame2:flip(true,false)
+      flipSide = "left"
+   end
+
+   -- switch animation frames
+   if currentTick >= frameTick then
+      currentFrame = (currentFrame == 1) and 2 or 1
+      currentTick = 0
+   else
+      currentTick = currentTick + 1
+   end
 end
 
 function movePlayer()
