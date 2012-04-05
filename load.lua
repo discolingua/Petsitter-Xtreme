@@ -19,6 +19,8 @@ function petLoad()
 
    Collider = HC(100, on_collide)
 
+
+   -- load graphics assets and set up quads
    bg = love.graphics.newImage("petsitterbg.png")
 
    player = love.graphics.newImage("petsitter64.png")
@@ -34,5 +36,11 @@ function petLoad()
    petX = 400
    petY = 200
    petCollider = Collider:addRectangle(petX+64, petY+32, 128, 64)
+
+   -- load audio assets
+   gameMusic = love.audio.newSource("audio/xtremepetmusic.ogg")
+   gameMusic:setLooping(true)
+   love.audio.play(gameMusic)
+
    gamepad = love.joystick.open(0)
 end
