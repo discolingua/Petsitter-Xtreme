@@ -8,9 +8,19 @@ function petUpdate(dt)
 end
 
 function movePlayer()
+
+   -- joystick movement
    stickX, stickY = love.joystick.getAxes(gamepad)
    playerX = playerX + (4 * stickX)
    playerY = playerY + (3 * stickY)
+
+   -- only poll move keys if no stick movement
+   if (stickX == 0) and (stickY == 0) then
+      if love.keyboard.isDown("up") then playerY = playerY - 3 end
+      if love.keyboard.isDown("down") then playerY = playerY + 3 end
+      if love.keyboard.isDown("left") then playerX = playerX - 4 end
+      if love.keyboard.isDown("right") then playerX = playerX + 4 end
+   end
 
    -- keep player within screen boundary
    if playerX < 0 then playerX = 0 end
