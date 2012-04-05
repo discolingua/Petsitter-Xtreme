@@ -2,11 +2,9 @@ function petUpdate(dt)
    movePlayer()
    movePet()
    checkColliders()
+   miscUpkeep()
 
-   while #statusText > 40 do
-      table.remove(statusText, 1)
-   end
-
+  
 end
 
 function movePlayer()
@@ -22,15 +20,17 @@ function movePlayer()
 end
 
 function movePet()
-   local dx = playerX - petX
-   local dy = playerY - petY
-   local dist = ((dx ^ 2) + (dy ^ 2)) ^ 0.5 --sqrt
+   if not ((playerX == petX) and (playerY == petY)) then
+      local dx = playerX - petX
+      local dy = playerY - petY
+      local dist = ((dx ^ 2) + (dy ^ 2)) ^ 0.5 --sqrt
 
-   dx = dx / dist
-   dy = dy / dist
+      dx = dx / dist
+      dy = dy / dist
 
-   petX = petX + dx
-   petY = petY + dy
+      petX = petX + dx
+      petY = petY + dy
+   end
 end
 
 function checkColliders()
@@ -41,4 +41,13 @@ function checkColliders()
    petCollider:moveTo(petX+64, petY+32)
 
    Collider:update(dt)
+end
+
+function miscUpkeep()
+   if cooldown > 0 then cooldown = cooldown - 1 end
+
+   -- trim status text table
+   while #statusText > 40 do
+      table.remove(statusText, 1)
+   end
 end

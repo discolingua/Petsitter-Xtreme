@@ -2,7 +2,7 @@ function petDraw()
 
    love.graphics.draw(bg,0,0)
 
-   -- drawColliders()
+   drawColliders()
 
    love.graphics.draw(player, playerX, playerY)
    love.graphics.draw(pet, petX, petY)
@@ -11,8 +11,8 @@ function petDraw()
 end
 
 function drawColliders()
-   playerCollider:draw('fill')
-   petCollider:draw('fill')
+   -- playerCollider:draw('fill')
+   -- petCollider:draw('fill')
 
    for i = 1,#statusText do
       love.graphics.setColor(255,255,255, 255 - (i-1) * 6)
@@ -20,5 +20,6 @@ function drawColliders()
    end
 
    love.graphics.setColor(255,255,255,255)
-   
+   love.graphics.print(cooldown, 600, 500)
+
 end

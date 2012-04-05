@@ -1,6 +1,8 @@
 function petLoad()
 
-   statusText = {}
+   statusText = {}         -- used for debugging
+   maxCooldown = 50       -- collision cooldown
+   cooldown = 0
 
    math.randomseed(os.time())
    love.mouse.setVisible(false)
