@@ -35,8 +35,8 @@ function movePet()
       local dy = playerY - petY
       local dist = ((dx ^ 2) + (dy ^ 2)) ^ 0.5 --sqrt
 
-      dx = dx / dist
-      dy = dy / dist
+      dx = (dx / dist) * petFrenzy
+      dy = (dy / dist) * petFrenzy
 
       petX = petX + dx
       petY = petY + dy

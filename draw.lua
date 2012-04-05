@@ -2,9 +2,10 @@ function petDraw()
 
    love.graphics.draw(bg,0,0)
 
-   drawColliders()
+   -- drawColliders()
 
-   love.graphics.draw(player, playerX, playerY)
+   animatePlayer()
+
    love.graphics.draw(pet, petX, petY)
 
   
@@ -22,4 +23,16 @@ function drawColliders()
    love.graphics.setColor(255,255,255,255)
    love.graphics.print(cooldown, 600, 500)
 
+end
+
+
+function animatePlayer()
+   if (playerX > petX) and flipSide == "left" then
+      playerFrame1:flip(true,false)
+      flipSide = "right" 
+   elseif (playerX < petX) and flipSide == "right" then
+      playerFrame1:flip(true,false)
+      flipSide = "left"
+   end
+   love.graphics.drawq(player, playerFrame1, playerX, playerY)
 end
