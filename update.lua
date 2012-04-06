@@ -35,6 +35,11 @@ function readInput()
    if love.keyboard.isDown("t") then
       love.graphics.toggleFullscreen()
    end
+
+   if love.keyboard.isDown("z") or love.joystick.isDown(0,0) then
+      paperWhack()
+   end
+
    -- joystick movement
    stickX, stickY = love.joystick.getAxes(gamepad)
    playerX = playerX + (4 * stickX)
@@ -57,8 +62,8 @@ end
 
 function movePet()
    if not ((playerX == petX) and (playerY == petY)) then
-      local dx = playerX - petX
-      local dy = playerY - petY
+      local dx = (playerX+32) - (petX+64)
+      local dy = (playerY+32) - (petY+32)
       local dist = ((dx ^ 2) + (dy ^ 2)) ^ 0.5 --sqrt
 
       dx = (dx / dist) * petFrenzy
@@ -85,5 +90,22 @@ function miscUpkeep()
    -- trim status text table
    while #statusText > 10 do
       table.remove(statusText, 1)
+   end
+
+   if playerHealth < 0 then 
+      gameOverCooldown = 300
+      gameState = "gameOver" 
+   end
+end
+
+function paperWhack()
+   local dx = math.abs((playerX+32) - (petX+64))
+   local dy = math.abs((playerY+32) - (petY+32))
+   if (dy <= 25) and (dx <=120) then
+      if flipSide == "left" then petX = petX + 96 
+      else petX = petX - 96
+      end
+      playerScore = playerScore + math.random(100,500000)
+      love.audio.play(whackFx)
    end
 end

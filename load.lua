@@ -11,24 +11,28 @@ function petLoad()
    flipSide = "left"       -- player is on left side
  
    petFrenzy = 1           -- pet speed modifier
-   gameState = "title"     -- values are title/intro/play
-   love.graphics.setFont(love.graphics.newFont(24))
+   petDistance = 0         -- distance between player and pet
 
+   gameState = "title"     -- values are title/title2/gameOver/game
+   titleCooldown = 100
 
+   font = love.graphics.newFont("runcoward.ttf",24)
+   love.graphics.setFont(font)
 
    math.randomseed(os.time())
-   love.mouse.setVisible(false)
 
-
-   Collider = HC(100, on_collide)
+   Collider = HC(100, on_collide)    -- collision callback
 
 
    -- load graphics assets and set up quads
    bg = love.graphics.newImage("petsitterbg.png")
    titleBg = love.graphics.newImage("title.png")
+   title2Bg = love.graphics.newImage("title2.png")
 
    fishbowl = love.graphics.newImage("fishbowl.png")
+   bloodImg = love.graphics.newImage("blood.png")
 
+   blood = {}
    fish = {}
    for i=1, 3 do fishCreate(i) end
 
@@ -39,6 +43,7 @@ function petLoad()
    playerY = 200
    playerCollider = Collider:addRectangle(playerX+32, playerY+40,64,64)
    playerScore = 0
+   playerHealth = 5
 
    pet = love.graphics.newImage("badger.png")
    petFrame1 = love.graphics.newQuad(0,0,128,64,256,64)
@@ -48,6 +53,8 @@ function petLoad()
    petCollider = Collider:addRectangle(petX+64, petY+32, 128, 64)
 
    -- load audio assets
+   whackFx = love.audio.newSource("audio/paperwhack.ogg")
+   petFx = love.audio.newSource("audio/badger.ogg")
    titleMusic = love.audio.newSource("audio/xtremepettitle.ogg")
    gameMusic = love.audio.newSource("audio/xtremepetmusic.ogg")
    titleMusic:setLooping(true)

@@ -20,6 +20,7 @@ require 'collide'
 
 -- require entities
 require 'title'
+require 'gameover'
 
 function love.load()
    petLoad()
@@ -28,6 +29,10 @@ end
 function love.update(dt)
    if gameState == "title" then
       titleUpdate(dt)
+   elseif gameState == "title2" then
+      title2Update(dt)
+   elseif gameState == "gameOver" then
+      gameOverUpdate(dt)
    else
       petUpdate(dt)
    end
@@ -36,6 +41,10 @@ end
 function love.draw()
    if gameState == "title" then
       titleDraw()
+   elseif gameState == "title2" then
+      title2Draw()
+   elseif gameState == "gameOver" then
+      gameOverDraw()
    else
       petDraw()
    end
