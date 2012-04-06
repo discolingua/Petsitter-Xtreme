@@ -1,11 +1,9 @@
 function petUpdate(dt)
    toggleFrames()
-   movePlayer()
+   readInput()
    movePet()
    checkColliders()
    miscUpkeep()
-
-  
 end
 
 function toggleFrames()
@@ -33,8 +31,10 @@ function toggleFrames()
    end
 end
 
-function movePlayer()
-
+function readInput()
+   if love.keyboard.isDown("t") then
+      love.graphics.toggleFullscreen()
+   end
    -- joystick movement
    stickX, stickY = love.joystick.getAxes(gamepad)
    playerX = playerX + (4 * stickX)
@@ -83,7 +83,7 @@ function miscUpkeep()
    if cooldown > 0 then cooldown = cooldown - 1 end
 
    -- trim status text table
-   while #statusText > 40 do
+   while #statusText > 10 do
       table.remove(statusText, 1)
    end
 end

@@ -18,15 +18,25 @@ require 'update'
 require 'draw'
 require 'collide'
 
+-- require entities
+require 'title'
 
 function love.load()
    petLoad()
 end
 
 function love.update(dt)
-   petUpdate(dt)
+   if gameState == "title" then
+      titleUpdate(dt)
+   else
+      petUpdate(dt)
+   end
 end
 
 function love.draw()
-   petDraw()
+   if gameState == "title" then
+      titleDraw()
+   else
+      petDraw()
+   end
 end
